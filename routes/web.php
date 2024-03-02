@@ -17,13 +17,14 @@ Route::get('/', function () {
     $html = "
     <h1>Contact App</h1>
     <div>
-        <a href='". route('contacts.index')."'>All contacts</a>
-        <a href='". route('contacts.create')."'>add contacts</a>
-        <a href='". route('contacts.show',1)."'>Show contact</a>
+        <a href='". route('admin.contacts.index')."'>All contacts</a>
+        <a href='". route('admin.contacts.create')."'>add contacts</a>
+        <a href='". route('admin.contacts.show',1)."'>Show contact</a>
     </div>
     ";
     return $html;
 });
+Route::prefix('admin')->name('admin.')->group(function(){
 
 
 Route ::get('/contacts',function(){
@@ -38,7 +39,7 @@ Route::get('/contacts/{id}',function($id){
     return "Contact".$id;
 })->name('contacts.show');
 //where('id','[0-9]+1'); //set only numbers //if you input /contacts/john  you get an error.
-
+});
 
 
 Route::get('/companies/{name?}', function($name=null){
@@ -58,3 +59,8 @@ Route::get('/bars/{name?}', function($name=null){
         return "All companies";
     }
 })->whereAlphaNumeric('name');
+
+//if you put the not existing routes
+Route::fallback(function(){
+    return"<h1> Sorry,the page doesn't exist </h1>";
+});
