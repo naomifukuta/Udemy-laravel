@@ -3,4 +3,5 @@
     <?php foreach ($companies as $id => $company): ?>
     <option value="{{$id}}">{{$company ['name']}}</option>
     <?php endforeach ?>
+    
   </select>
