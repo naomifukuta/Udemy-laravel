@@ -14,21 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $html = "
-    <h1>Contact App</h1>
-    <div>
-        <a href='". route('admin.contacts.index')."'>All contacts</a>
-        <a href='". route('admin.contacts.create')."'>add contacts</a>
-        <a href='". route('admin.contacts.show',1)."'>Show contact</a>
-    </div>
-    ";
+  
     return view('welcome');
 });
-Route::prefix('admin')->name('admin.')->group(function(){
 
 
 Route ::get('/contacts',function(){
-    return"<h1>All contacts</h1>";
+    return view('contacts.index');
 })->name('contacts.index');
 
 Route::get('/contacts/create',function(){
@@ -39,7 +31,6 @@ Route::get('/contacts/{id}',function($id){
     return "Contact".$id;
 })->name('contacts.show');
 //where('id','[0-9]+1'); //set only numbers //if you input /contacts/john  you get an error.
-});
 
 
 Route::get('/companies/{name?}', function($name=null){

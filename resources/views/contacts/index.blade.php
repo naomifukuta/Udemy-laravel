@@ -6,10 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Contact App</h1>
+    <h1>all contacts</h1>
     <div>
-        <a href='{{ route('contacts.index') }}'>All contacts</a>
-
+        
+        <a href='{{ route('contacts.create') }}'>Add contacts</a>
+        <a href='{{ route('contacts.show', 1) }}'>Show contact</a>
     </div>
 </body>
 </html>
