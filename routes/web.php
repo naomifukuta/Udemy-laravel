@@ -22,7 +22,7 @@ Route::get('/', function () {
         <a href='". route('admin.contacts.show',1)."'>Show contact</a>
     </div>
     ";
-    return $html;
+    return view('welcome');
 });
 Route::prefix('admin')->name('admin.')->group(function(){
 
