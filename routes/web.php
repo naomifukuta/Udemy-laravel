@@ -12,34 +12,38 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+function getContacts(){
+    return[
+        
+            1 => ['name' => 'Name 1', 'phone' => '1234567890'],
+            2 => ['name' => 'Name 2', 'phone' => '2345678901'],
+            3 => ['name' => 'Name 3', 'phone' => '3456789012'],
+        ];
+    
+}
 Route::get('/', function () {
-    $html = "
-    <h1>Contact App</h1>
-    <div>
-        <a href='". route('admin.contacts.index')."'>All contacts</a>
-        <a href='". route('admin.contacts.create')."'>add contacts</a>
-        <a href='". route('admin.contacts.show',1)."'>Show contact</a>
-    </div>
-    ";
-    return $html;
+  
+    return view('welcome');
 });
-Route::prefix('admin')->name('admin.')->group(function(){
 
 
 Route ::get('/contacts',function(){
-    return"<h1>All contacts</h1>";
+    $contacts = getContacts();
+    return view('contacts.index',compact('contacts'));
 })->name('contacts.index');
 
 Route::get('/contacts/create',function(){
-    return "<h1>add new contact </h1>";
+    return view('contacts.create');
 })->name('contacts.create');
 
 Route::get('/contacts/{id}',function($id){
-    return "Contact".$id;
+    $contacts = getContacts();
+    abort_unless(!isset($contacts[$id]),404);
+    $contact = $contacts[$id];
+    return view('contacts.show')->with('contact',$contact);
+    
 })->name('contacts.show');
 //where('id','[0-9]+1'); //set only numbers //if you input /contacts/john  you get an error.
-});
 
 
 Route::get('/companies/{name?}', function($name=null){
